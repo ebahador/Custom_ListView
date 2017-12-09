@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="resicon">
+        <item>@drawable/as</item>
+        <item>@drawable/intellij</item>
+        <item>@drawable/intellij1</item>
+        <item>@drawable/as</item>
+        <item>@drawable/intellij</item>
+        <item>@drawable/intellij1</item>
+        <item>@drawable/intellij</item>
+        <item>@drawable/intellij1</item>
+        <item>@drawable/as</item>
+    </array>
+    <array name="restext">
+        <item>"alert"</item>
+        <item>"dialer"</item>
+        <item>"email"</item>
+        <item>"info"</item>
+        <item>"map"</item>
+        <item>"camera"</item>
+        <item>"compass"</item>
+        <item>"gallery"</item>
+        <item>"calendar"</item>
+    </array>
+
+</resources>
