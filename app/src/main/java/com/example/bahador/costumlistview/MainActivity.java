@@ -1,16 +1,12 @@
 package com.example.bahador.costumlistview;
 
-import android.app.Activity;
-import android.content.Context;
+
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
@@ -30,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initItems() {
-        items = new ArrayList<Item>();
+        items = new ArrayList<>();
 
         TypedArray arrayDrawable = getResources().obtainTypedArray(R.array.resicon);
         TypedArray arrayText = getResources().obtainTypedArray(R.array.restext);
@@ -38,8 +34,7 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < arrayDrawable.length(); i++) {
             Drawable d = arrayDrawable.getDrawable(i);
             String s = arrayText.getString(i);
-            boolean b = false;
-            Item item = new Item(d, s, b);
+            Item item = new Item(d, s, false);
             items.add(item);
         }
 
@@ -57,8 +52,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        listView = (ListView) findViewById(R.id.listview);
-        btnLookup = (Button) findViewById(R.id.lookup);
+        listView = findViewById(R.id.listview);
+        btnLookup = findViewById(R.id.lookup);
 
         initItems();
         myItemsListAdapter = new ItemsListAdapter(this, items);
@@ -78,34 +73,20 @@ public class MainActivity extends AppCompatActivity {
         btnLookup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String str = "Check items:\n";
+                StringBuilder str = new StringBuilder("Check items:\n");
 
                 for (int i = 0; i < items.size(); i++) {
                     if (items.get(i).isChecked()) {
-                        str += i + "\n";
+                        str.append(i).append("\n");
                     }
                 }
-
-                /*
-                int cnt = myItemsListAdapter.getCount();
-                for (int i=0; i<cnt; i++){
-                    if(myItemsListAdapter.isChecked(i)){
-                        str += i + "\n";
-                    }
-                }
-                */
 
                 Toast.makeText(MainActivity.this,
-                        str,
+                        str.toString(),
                         Toast.LENGTH_LONG).show();
 
             }
         });
     }
 
-    /*public void getAppContext(String str, boolean state) {
-        Toast.makeText(getApplicationContext(),
-                str + "setOnClickListener\nchecked: " + state,
-                Toast.LENGTH_LONG).show();
-    }*/
 }

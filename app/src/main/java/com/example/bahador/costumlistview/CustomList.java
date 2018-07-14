@@ -1,15 +1,12 @@
 package com.example.bahador.costumlistview;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.CheckBox;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -42,10 +39,11 @@ class ItemsListAdapter extends BaseAdapter{
         return position;
     }
 
-    public boolean isChecked(int position) {
+    private boolean isChecked(int position) {
         return list.get(position).checked;
     }
 
+    @SuppressLint("InflateParams")
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         View rowView = convertView;
@@ -56,9 +54,9 @@ class ItemsListAdapter extends BaseAdapter{
             LayoutInflater inflater = ((Activity) context).getLayoutInflater();
             rowView = inflater.inflate(R.layout.row, null);
 
-            viewHolder.checkBox = (CheckBox) rowView.findViewById(R.id.rowCheckBox);
-            viewHolder.icon = (ImageView) rowView.findViewById(R.id.rowImageView);
-            viewHolder.text = (TextView) rowView.findViewById(R.id.rowTextView);
+            viewHolder.checkBox = rowView.findViewById(R.id.rowCheckBox);
+            viewHolder.icon = rowView.findViewById(R.id.rowImageView);
+            viewHolder.text = rowView.findViewById(R.id.rowTextView);
             rowView.setTag(viewHolder);
         } else {
             viewHolder = (MainActivity.ViewHolder) rowView.getTag();
@@ -72,26 +70,10 @@ class ItemsListAdapter extends BaseAdapter{
 
         viewHolder.checkBox.setTag(position);
 
-            /*
-            viewHolder.checkBox.setOnCheckedChangeListener(
-                    new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                    list.get(position).checked = b;
-
-                    Toast.makeText(getApplicationContext(),
-                            itemStr + "onCheckedChanged\nchecked: " + b,
-                            Toast.LENGTH_LONG).show();
-                }
-            });
-            */
-
         viewHolder.checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                boolean newState = !list.get(position).isChecked();
-                list.get(position).checked = newState;
-                //toast.getAppContext(itemStr, newState);
+                list.get(position).checked = !list.get(position).isChecked();
 
             }
         });
